@@ -10,7 +10,7 @@ let photoArray = [];
 
 // unspalsh API
 let initialCount = 5;
-const apiKey = 'jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek';
+const apiKey = 'jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek'; //note this is not a private key as used for practice purposes. in private projects keys will not be shown.
 let apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialCount}`;
 
 
