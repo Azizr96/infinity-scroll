@@ -1,17 +1,23 @@
 const imageContainer = document.getElementById('image-container');
-const loader = document.getElementById('loader');
+const loader = document.querySelector('.loader');
 
 let ready = false;
 let imagesLoaded = 0;
 let totalImages = 0;
+let intitalLoad = true;
 // global photoArray
 let photoArray = [];
 
 // unspalsh API
-const count = 30;
-const apiKey = 'o9xQ6DHjgF7h8w-bUlauVhuI13Zd4jgseEiH84gK1kw';
-const apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+let initialCount = 5;
+const apiKey = 'jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek';
+let apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialCount}`;
 
+
+// upadate api url with rew count
+function updateAPIURLWithNewCount (picCount) {
+  apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${picCount}`;
+}
 
 
 // check if al images are loaded as well as adding loader
@@ -27,7 +33,7 @@ function imageLoaded(){
 
 function setAttributes(element, attributes) {
   for (const key in attributes) {
-    element.setAttribute('key', attributes[key]);
+    element.setAttribute(key, attributes[key]);
   }
 }
 // create Elements for links & photos and add to dom
@@ -65,6 +71,10 @@ async function getPhotos(){
     const response = await fetch(apiURL);
     photoArray = await response.json();
     displayPhotos();
+    if(intitalLoad) {
+      updateAPIURLWithNewCount(30);
+      initialCount = false;
+    }
     
   } catch (error){
     //catch error here
